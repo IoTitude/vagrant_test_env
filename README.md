@@ -75,6 +75,17 @@ branch to push: master
 
 
 
+# troubleshooting
+
+## stuck
+http://stackoverflow.com/questions/22575261/vagrant-stuck-connection-timeout-retrying
+
+## ssh
+https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your-provider-in-vagrant-on-an-ubuntu-12-10-vps
+http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
+
+
+
 
 
 
