@@ -85,7 +85,12 @@ https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your
 http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
 
 
+ssh-keygen -t rsa
 
+chmod 0700 -R /home/jaakko/.ssh
+
+config.ssh.private_key_path = "~/.ssh/id_rsa"
+config.ssh.forward_agent = true
 
 
 
