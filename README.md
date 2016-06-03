@@ -7,10 +7,12 @@ sudo apt-get install oracle-java8-installer
 
 # Jenkins
 
+```shell
 wget http://mirrors.jenkins-ci.org/war/latest/jenkins.war
 java -jar jenkins.war
 
 sudo service jenkins start
+```
 
 http://localhost:8080/
 
