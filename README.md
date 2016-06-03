@@ -96,6 +96,8 @@ chmod 0700 -R /home/jaakko/.ssh
 config.ssh.private_key_path = "~/.ssh/id_rsa"
 config.ssh.forward_agent = true
 
+https://www.bountysource.com/issues/3453738-vagrant-can-t-connect-to-digital-ocean-via-ssh
+
 
 
 
