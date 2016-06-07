@@ -51,13 +51,16 @@ git clone https://github.com/Bowsse/test_env   vagrant
 Jenkins build steps (Execute shell)
 
 1. Launch the vagrant environment from the cloned directory
+
 * cd ~/vagrant
 * vagrant up
 
 2. Run tests in the vagrant machine/droplet
+
 * vagrant ssh -c "source /vagrant/vnc.sh"
 
 3. Copy the robot results
+
 * cd ~/vagrant
 * vagrant scp :/root/test/report.html ~/testresults/report.html
 * vagrant scp :/root/test/log.html ~/testresults/log.html
