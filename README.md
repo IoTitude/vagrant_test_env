@@ -1,3 +1,5 @@
+# Jenkins & Vagrant setup
+
 # Oracle Java 8
 
 ```shell
@@ -48,27 +50,6 @@ Clone the vagrant environment repository
 git clone https://github.com/Bowsse/test_env   vagrant
 ```
 
-Jenkins build steps (Execute shell)
-
-1. Launch the vagrant environment from the cloned directory
-
-* cd ~/vagrant
-* vagrant up
-
-2. Run tests in the vagrant machine/droplet
-
-* vagrant ssh -c "source /vagrant/vnc.sh"
-
-3. Copy the robot results
-
-* cd ~/vagrant
-* vagrant scp :/root/test/report.html ~/testresults/report.html
-* vagrant scp :/root/test/log.html ~/testresults/log.html
-* vagrant scp :/root/test/output.xml ~/testresults/output.xml
-
-Finally destroy the droplet/virtual machine
-* vagrant destroy --force
-
 # Setting a developement repository
 ```shell
 mkdir workspace
@@ -86,47 +67,93 @@ git add -A
 git pull
 
 git push origin master
+```
 
-# New jenkins projet
-freestyle
+# New jenkins project
+Jenkins -> new item -> freestyle project
 
-bowsse_web
-github project -> https://github.com/Bowsse/bowsse_web
+Github project -> https://github.com/Bowsse/bowsse_web
 
-scm Git https://github.com/Bowsse/bowsse_web
+## Source Code Management
+Git
+* Repository URLhttps://github.com/Bowsse/bowsse_web
 
-add credientials
+* Create and add github credentials
 
-*/dev
+* You can specify a branch track. Leaving it empty means all branches are tracked.
 
-//build trigger github hook
+## Build Triggers
+* Build when a change is pushed to GitHub
+    * Build event is triggered when a change is made in the repository specified above.
 
-after build
-git publisher
-branch to push: master
+Go to Jenkins System configuration
 
+GitHub
+* Add GitHub Server
+* Add GitHub Credentials
+* Manage hooks
 
+Then open the developement Github repository
+* Settings
+* Webhooks & Services
+* Add service Jenkins (Github)
+* http://JENKINSURL:8080/github-webhook/
 
-# troubleshooting
+## Build steps (Execute shell)
 
-## stuck
+1. Launch the vagrant environment from the cloned directory
+
+  * cd ~/vagrant
+  * vagrant up
+
+2. Run tests in the vagrant machine/droplet
+
+  * vagrant ssh -c "source /vagrant/vnc.sh"
+
+3. Copy the robot results
+
+  * cd ~/vagrant
+  * vagrant scp :/root/test/report.html ~/testresults/report.html
+  * vagrant scp :/root/test/log.html ~/testresults/log.html
+  * vagrant scp :/root/test/output.xml ~/testresults/output.xml
+
+Finally destroy the droplet/virtual machine
+  * vagrant destroy --force
+
+## Post-build Actions
+### Publish Robot Frmaework test results
+Directory of Robot output 
+* Directory where the copied robot results are found. In this case ~/testresults.
+
+### Git Publisher
+* Push Only If Build Succeeds
+ 
+# Troubleshooting
+
+Use the debug log to launch vagrant
+* VAGRANT_LOG=debug vagrant up
+
+## Stuck connecting
 http://stackoverflow.com/questions/22575261/vagrant-stuck-connection-timeout-retrying
 
-## ssh
-https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your-provider-in-vagrant-on-an-ubuntu-12-10-vps
-http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
+## SSH
+Generating SSH keys
+* ssh-keygen -t rsa
 
-
-ssh-keygen -t rsa
-
-chmod 0700 -R /home/jaakko/.ssh
-
+```shell
+Include in Vagrantfile
 config.ssh.private_key_path = "~/.ssh/id_rsa"
 config.ssh.forward_agent = true
+```
 
+https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your-provider-in-vagrant-on-an-ubuntu-12-10-vps
+http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
 https://www.bountysource.com/issues/3453738-vagrant-can-t-connect-to-digital-ocean-via-ssh
 
-Robot result workaround  
+## Workaround for robot results not opening in Jenkins
+* Manage Jenkins
+* Script Console
+```
 System.setProperty("hudson.model.DirectoryBrowserSupport.CSP","sandbox allow-scripts; default-src 'none'; img-src 'self' data: ; style-src 'self' 'unsafe-inline' data: ; script-src 'self' 'unsafe-inline' 'unsafe-eval' ;")
-
+```
 
