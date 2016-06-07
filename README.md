@@ -108,7 +108,7 @@ Then open the developement Github repository
 
 2. Run tests in the vagrant machine/droplet
 
-  * vagrant ssh -c "source /vagrant/vnc.sh"
+  * vagrant ssh -c "source /vagrant/robotlaunch.sh"
 
 3. Copy the robot results
 
