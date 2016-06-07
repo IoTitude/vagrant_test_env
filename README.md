@@ -50,15 +50,15 @@ Clone the vagrant environment repository
 git clone https://github.com/Bowsse/test_env   vagrant
 ```
 
-# Setting a developement repository
+# Setting a developement repository (You should let Jenkins do this)
 ```shell
 mkdir workspace
 cd workspace
-git clone https://github.com/Bowsse/Bowsse.github.io.git
-cd Bowsse.github.io
+git clone https://github.com/publishingrepository
+cd publishingrepository
 
 # Set git remote to an empty repository
-git remote set-url origin https://github.com/Bowsse/bowsse_web
+git remote set-url origin https://github.com/developementrepository
 
 git config --global user.email "user@email.com"
 git config --global user.name "username"
@@ -72,11 +72,11 @@ git push origin master
 # New jenkins project
 Jenkins -> new item -> freestyle project
 
-Github project -> https://github.com/Bowsse/bowsse_web
+Github project -> https://github.com/developementrepository
 
 ## Source Code Management
 Git
-* Repository URLhttps://github.com/Bowsse/bowsse_web
+* Repository URL https://github.com/developementrepository
 
 * Create and add github credentials
 
@@ -146,9 +146,9 @@ config.ssh.private_key_path = "~/.ssh/id_rsa"
 config.ssh.forward_agent = true
 ```
 
-https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your-provider-in-vagrant-on-an-ubuntu-12-10-vps
-http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
-https://www.bountysource.com/issues/3453738-vagrant-can-t-connect-to-digital-ocean-via-ssh
+* https://www.digitalocean.com/community/tutorials/how-to-use-digitalocean-as-your-provider-in-vagrant-on-an-ubuntu-12-10-vps
+* http://stackoverflow.com/questions/22922891/vagrant-ssh-authentication-failure
+* https://www.bountysource.com/issues/3453738-vagrant-can-t-connect-to-digital-ocean-via-ssh
 
 ## Workaround for robot results not opening in Jenkins
 * Manage Jenkins
